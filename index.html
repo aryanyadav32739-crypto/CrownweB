@@ -47,6 +47,7 @@
             color: #fff;
             font-size: 15px;
             box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
+            cursor: pointer;
         }
         .video-container {
             position: relative;
@@ -54,6 +55,7 @@
             margin-bottom: 20px;
             border-radius: 8px;
             overflow: hidden;
+            background: #000;
         }
         .video-container iframe {
             width: 100%;
@@ -135,6 +137,13 @@
         .buy-btn:hover {
             background: #c0392b;
         }
+        /* Extra spacing structure to maintain full length layout */
+        .store-footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #718096;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -144,12 +153,13 @@
             <p>Official Server Store</p>
         </header>
 
-        <div class="ip-box">
-            Play.CrownSMP.net:40008
+        <div class="ip-box" onclick="navigator.clipboard.writeText('Play.CrownSMP.net:40008'); alert('Server IP Copied!');">
+            Play.CrownSMP.net:40008 (Click to Copy)
         </div>
 
+        <!-- Dynamic Admin-Connected Video Container with Auto-play -->
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" loading="lazy" allowfullscreen></iframe>
+            <iframe id="storeVideo" src="" title="Server Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <h2 class="section-title">PREMIUM RANKS</h2>
@@ -219,6 +229,30 @@
                 <a href="#" class="buy-btn">BUY - ₹499</a>
             </div>
         </div>
+
+        <div class="store-footer">
+            &copy; 2026 CrownSMP. All rights reserved.
+        </div>
     </div>
+
+    <script>
+        // Admin Panel integration: Fetching video URL dynamically from localStorage or default fallback
+        window.addEventListener('DOMContentLoaded', () => {
+            let videoUrl = localStorage.getItem('admin_video_url');
+            
+            // Fallback default video ID if admin panel hasn't set one yet
+            if (!videoUrl) {
+                videoUrl = "https://www.youtube.com/embed/YOUR_DEFAULT_VIDEO_ID";
+            }
+            
+            // Ensure autoplay and mute parameters are appended so it plays automatically without clicking
+            if (!videoUrl.includes('autoplay=1')) {
+                const separator = videoUrl.includes('?') ? '&' : '?';
+                videoUrl += separator + 'autoplay=1&mute=1&loop=1';
+            }
+            
+            document.getElementById('storeVideo').src = videoUrl;
+        });
+    </script>
 </body>
 </html>
