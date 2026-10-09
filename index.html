@@ -198,7 +198,7 @@
     </section>
 
     <script>
-        // Default Config with YouTube Background pre-set
+        // Default Config with YouTube Background pre-set[span_2](start_span)[span_2](end_span)
         const defaultConfig = {
             serverName: 'CrownSMP',
             subtext: 'Official Server Store',
@@ -228,7 +228,7 @@
         const ytId = getYouTubeId(cfg.bgUrl);
         if (ytId) {
             const muteVal = cfg.audioState === '1' ? '0' : '1';
-            // Optimized with loading="lazy" and performance tweaks to eliminate buffering lag
+            // Added autoplay, mute, loop, and playsinline parameters for seamless auto-play without requiring user click
             document.getElementById('yt-bg-wrapper').innerHTML = `
                 <iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=${muteVal}&controls=0&loop=1&playlist=${ytId}&enablejsapi=1&playsinline=1" 
                     loading="lazy" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -258,7 +258,7 @@
         `;
         document.head.appendChild(styleTag);
 
-        // Fallback Ranks, Keys, Shards
+        // Fallback Ranks, Keys, Shards[span_3](start_span)[span_3](end_span)
         let ranks = JSON.parse(localStorage.getItem('site_ranks')) || [
             { name: "PLUS", price: "49", desc: "Basic perks", perks: ["Protection 3 diamond armour", "Iron tools", "2 PV", "2 Homes"] },
             { name: "VIP", price: "199", desc: "CrownSMP power", perks: ["3 PV", "4 Homes", "/echest", "VIP tag"] },
